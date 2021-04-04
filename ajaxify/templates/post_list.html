@@ -1,0 +1,21 @@
+{% extends "_base.html" %}
+
+{% load markdown_extras %}
+
+{% block page_content %}
+<div class="row mb-2 posts">
+    <h1>blog posts list:</h1>
+    {% for post in posts %}
+    <div class="col-md-6">
+        <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+                <h3 class="mb-0"><a href="{% url 'post_detail' post.slug %}">{{post.title}}</a></h3>
+                
+                <p class="mb-auto">{{post.summary}}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    
+</div>
+{% endblock page_content %}

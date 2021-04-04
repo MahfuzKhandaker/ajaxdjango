@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS -->ajaxdjangocrud\static\css\bootstrap.min.css
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 </head>
     <body>
@@ -20,6 +20,7 @@
                 <div class="form-group">
                 <label for="exampleInputEmail1">Title</label>
                 <input type="text" class="form-control" id="title" placeholder="Title">
+                <input type="text" class="form-control" id="slug" placeholder="slug">
                 </div>
                 <div class="form-group">
                         <label for="exampleInputEmail1">Description</label>
@@ -53,6 +54,7 @@
                 url:'{% url "create" %}',
                 data:{
                     title:$('#title').val(),
+                    slug:$('#slug').val(),
                     description:$('#description').val(),
                     csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
                     action: 'post'

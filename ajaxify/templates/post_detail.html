@@ -1,0 +1,45 @@
+{% extends "_base.html" %}
+
+{% load markdown_extras %}
+
+{% block page_content %}
+
+{{request.user}}
+<div class="row mb-2 posts">
+    <div class="col-md-6">
+        <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+                <h3 class="mb-0">{{ post.title }}</h3>
+                <p class="mb-auto">{{ post.description }}</p>
+            </div>
+        </div>
+
+        <div id="like-section">
+            {% include 'like_section.html' %}
+        </div>
+    </div>
+</div>
+{% endblock page_content %}
+
+{% block js %}
+<script>
+    $(document).on('click', '#like', function(event){
+        event.preventDefault();
+        var slug = $(this).attr('value');
+        $.ajax({
+            type: 'POST',
+            url: '{% url "like" %}',
+            data: {'slug':slug, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+            dataType: 'json',
+            success: function(response){
+                $('#like-section').html(response['form'])
+                console.log($('#like-section').html(response['form']));
+            },
+            error: function(rs, e){
+                console.log(rs.responseText);
+            },
+        
+        });
+    });
+</script>
+{% endblock js %}
