@@ -12,6 +12,7 @@ except ImportError:
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
+from django.core.paginator import Paginator
 
 
 def create_post(request):
@@ -37,15 +38,27 @@ def create_post(request):
     return render(request, 'create_post.html', {'posts':posts})    
 
 
-class PostListView(generic.ListView):
-    model = Post
-    template_name = 'post_list.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(PostListView, self).get_context_data(**kwargs)
-        context['posts'] = Post.objects.all()
-        context['post_num'] = Post.objects.count()
-        return context
+def post_list(request):
+    posts = Post.objects.all()
+    # paginator = Paginator(posts, 2)
+    # page_number = request.GET.get('page')
+    # page_obj = paginator.get_page(page_number)
+    context = {
+        'posts': posts,
+    }
+    return render(request, 'post_list.html', context)
+
+
+# class PostListView(generic.ListView):
+#     model = Post
+#     template_name = 'post_list.html'
+
+#     def get_context_data(self, **kwargs):
+#         context = super(PostListView, self).get_context_data(**kwargs)
+#         context['posts'] = Post.objects.all()
+#         context['post_num'] = Post.objects.count()
+#         return context
 
 
 class SearchResultsListView(generic.ListView):

@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Application definition
 
@@ -40,7 +41,7 @@ INSTALLED_APPS = [
 
     # Third-party
     'pagedown.apps.PagedownConfig',
-
+    
     # Local Apps
     'ajaxify.apps.AjaxifyConfig',
 ]

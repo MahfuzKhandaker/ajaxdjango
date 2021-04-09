@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from ajaxify.views import create_post, PostListView, post_detail, SearchResultsListView, blog_category, like
+from ajaxify.views import create_post, post_list, post_detail, SearchResultsListView, blog_category, like
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -23,7 +23,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('create/', create_post, name='create'),
-    path('blog/', PostListView.as_view(), name='home'),
+    path('blog/', post_list, name='home'),
     path('like/', like, name='like'),
     path('search/', SearchResultsListView.as_view(), name='search_results'),
     path('blog/<slug:slug>/', post_detail, name='post_detail'),
